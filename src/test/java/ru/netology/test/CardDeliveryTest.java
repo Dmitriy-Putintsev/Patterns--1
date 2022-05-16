@@ -1,7 +1,7 @@
-package ru.netology.Test;
+package ru.netology.test;
 
 import com.codeborne.selenide.Configuration;
-import ru.netology.DataGenerator.DataGenerator;
+import ru.netology.datagenerator.DataGenerator;
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;

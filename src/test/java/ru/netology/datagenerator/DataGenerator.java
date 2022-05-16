@@ -1,4 +1,4 @@
-package ru.netology.DataGenerator;
+package ru.netology.datagenerator;
 
 import com.github.javafaker.Faker;
 import lombok.Value;
