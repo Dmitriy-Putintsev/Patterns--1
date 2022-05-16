@@ -1,3 +1,5 @@
+package ru.netology.Test;
+
 import com.codeborne.selenide.Configuration;
 import ru.netology.DataGenerator.DataGenerator;
 import com.codeborne.selenide.Condition;
