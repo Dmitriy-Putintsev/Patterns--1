@@ -20,8 +20,7 @@ public class DataGenerator {
     }
 
     public static String generateCity() {
-        final Random random = new Random();
-        final String[] citiesAdministrativeCenters = new String[]{"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ",
+        var citiesAdministrativeCenters = new String[]{"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ",
                 "Махачкала", "Магас", "Нальчик", "Элиста", "Черкесск", "Петрозаводск", "Сыктывкар", "Симферополь",
                 "Йошкар-Ола", "Саранск", "Якутск", "Владикавказ", "Казань", "Кызыл", "Ижевск", "Абакан", "Грозный",
                 "Чебоксары", "Барнаул", "Чита", "Петропавловск-Камчатский", "Краснодар", "Красноярск", "Пермь",
@@ -32,7 +31,7 @@ public class DataGenerator {
                 "Псков", "Ростов-на-Дону", "Рязань", "Самара", "Саратов", "Южно-Сахалинск", "Екатеринбург", "Смоленск",
                 "Тамбов", "Тверь", "Томск", "Тула", "Тюмень", "Ульяновск", "Челябинск", "Ярославль", "Москва",
                 "Санкт-Петербург", "Севастополь", "Биробиджан", "Нарьян-Мар", "Ханты-Мансийск", "Анадырь", "Салехард"};
-        return citiesAdministrativeCenters[random.nextInt(85)];
+        return citiesAdministrativeCenters[new Random().nextInt(citiesAdministrativeCenters.length)];
     }
 
 
