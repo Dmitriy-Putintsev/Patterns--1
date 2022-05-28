@@ -2,32 +2,24 @@ package ru.netology.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.conditions.ExactText;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import ru.netology.datagenerator.DataGenerator;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.Keys;
+import ru.netology.util.ScreenShooterReportPortalExtension;
 
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static sun.java2d.marlin.MarlinUtils.logInfo;
 
 
+@ExtendWith({ScreenShooterReportPortalExtension.class})
 class CardDeliveryTest {
     DataGenerator.UserInfo userInfo = DataGenerator.Registration.generateUser("Ru");
-
-    @BeforeAll
-    static void setUpAll() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
-
-    @AfterAll
-    static void tearDownAll() {
-        SelenideLogger.removeListener("allure");
-    }
 
     @BeforeEach
     void setUp() {
@@ -41,13 +33,19 @@ class CardDeliveryTest {
 
         //Заполнение и первоначальная отправка формы:
         $("[data-test-id='city'] input").setValue(userInfo.getCity());
+        logInfo("В поле ввода введён город " + userInfo.getCity());
         $("[data-test-id='name'] input").setValue(userInfo.getName());
+        logInfo("В поле ввода введено имя " + userInfo.getName());
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         String scheduledDate = DataGenerator.generateDate(4);
         $("[data-test-id='date'] input").setValue(scheduledDate);
+        logInfo("В поле ввода введена дата " + scheduledDate);
         $("[data-test-id='phone'] input").setValue(userInfo.getPhone());
+        logInfo("В поле ввода введен номер телефона " + userInfo.getPhone());
         $("[data-test-id='agreement']").click();
+        logInfo("Выполнен клик по чек боксу ");
         $(byText("Запланировать")).click();
+        logInfo("Выполнен клик по кнопке Запланировать ");
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + scheduledDate), Duration.ofSeconds(15));
 
@@ -55,7 +53,9 @@ class CardDeliveryTest {
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         String shiftDate = DataGenerator.generateDate(12);
         $("[data-test-id='date'] input").setValue(shiftDate);
+        logInfo("В поле ввода введена дата " + shiftDate);
         $(byText("Запланировать")).click();
+        logInfo("Выполнен клик по кнопке Запланировать ");
 
         //Взаимодействие с опцией перепланировки,
         //а содержание текста и время загрузки:
@@ -64,6 +64,7 @@ class CardDeliveryTest {
                         "У вас уже запланирована встреча на другую дату. Перепланировать?"), Duration.ofSeconds(15));
         $("[data-test-id=replan-notification] .button")
                 .shouldHave(Condition.text("Перепланировать")).click();
+        logInfo("Выполнен клик по кнопке Перепланировать ");
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + shiftDate), Duration.ofSeconds(15));
     }
@@ -74,13 +75,19 @@ class CardDeliveryTest {
         Configuration.holdBrowserOpen = true;
 
         $("[data-test-id='city'] input").setValue(userInfo.getCity());
+        logInfo("В поле ввода введён город " + userInfo.getCity());
         $("[data-test-id='name'] input").setValue(userInfo.getName());
+        logInfo("В поле ввода введено имя " + userInfo.getName());
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         String scheduledDate = DataGenerator.generateDate(4);
         $("[data-test-id='date'] input").setValue(scheduledDate);
+        logInfo("В поле ввода введена дата " + scheduledDate);
         $("[data-test-id='phone'] input").setValue(DataGenerator.generatePhone("en"));
+        logInfo("В поле ввода введен номер телефона " + DataGenerator.generatePhone("en"));
         $("[data-test-id='agreement']").click();
+        logInfo("Выполнен клик по чек боксу ");
         $(byText("Запланировать")).click();
+        logInfo("Выполнен клик по кнопке Запланировать ");
         $("[data-test-id='phone'] input_sub")
                 .shouldHave(new ExactText("Неверный формат номера мобильного телефона"));
     }
