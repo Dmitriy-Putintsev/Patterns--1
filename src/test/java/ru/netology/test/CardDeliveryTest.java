@@ -14,7 +14,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static sun.java2d.marlin.MarlinUtils.logInfo;
+import static ru.netology.util.LoggingUtils.logInfo;
 
 
 @ExtendWith({ScreenShooterReportPortalExtension.class})

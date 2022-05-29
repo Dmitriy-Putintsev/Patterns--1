@@ -16,4 +16,7 @@ public class LoggingUtils {
     public static void log(File file, String message) {
         LOGGER.info("RP_MESSAGE#FILE#{}#{}", file.getAbsolutePath(), message);
     }
+    public static void logInfo(String message) {
+        LOGGER.info(message);
+    }
 }
