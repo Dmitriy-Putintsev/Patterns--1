@@ -48,7 +48,7 @@ class CardDeliveryTest {
         logInfo("Выполнен клик по кнопке Запланировать ");
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + scheduledDate), Duration.ofSeconds(15));
-
+        logInfo("Встреча успешно запланирована на " + scheduledDate);
         //Изменение ранее введенной даты и отправка формы:
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         String shiftDate = DataGenerator.generateDate(12);
@@ -67,6 +67,7 @@ class CardDeliveryTest {
         logInfo("Выполнен клик по кнопке Перепланировать ");
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + shiftDate), Duration.ofSeconds(15));
+        logInfo("Встреча успешно запланирована на " + shiftDate);
     }
 
     @Test
